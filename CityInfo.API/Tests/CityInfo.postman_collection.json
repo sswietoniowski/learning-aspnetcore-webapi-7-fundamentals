@@ -194,12 +194,45 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Name\": \"\",\r\n    \"Description\": \"\"\r\n}",
+					"raw": "{\r\n    \"Name\": \"Mermaid of Warsaw\",\r\n    \"Description\": \"The symbol of Warsaw, represented on the city's coat of arms as well as in a number of statues and other imagery. \"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
+				},
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/cities/2/pointsofinterest/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"cities",
+						"2",
+						"pointsofinterest",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH Partially Update Point Of Interest",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/Name\",\r\n        \"value\": \"Syrenka Warszawska\"\r\n    }\r\n]"
 				},
 				"url": {
 					"raw": "https://localhost:{{portNumber}}/api/cities/2/pointsofinterest/4",

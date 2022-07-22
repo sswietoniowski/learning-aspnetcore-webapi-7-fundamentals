@@ -4,9 +4,9 @@ namespace CityInfo.API.Models
 {
     public class PointOfInterestDto
     {
+        [Key]
         public int Id { get; set; }
 
-        [Required]
         [MaxLength(64)]
         public string Name { get; set; } = string.Empty;
 
@@ -16,7 +16,7 @@ namespace CityInfo.API.Models
 
     public class PointOfInterestForCreationDto
     {
-        [Required]
+        [Required(ErrorMessage = "You should provide a name value for the point of interest.")]
         [MaxLength(64)]
         public string Name { get; set; } = string.Empty;
 
@@ -26,7 +26,7 @@ namespace CityInfo.API.Models
 
     public class PointOfInterestForUpdateDto 
     {
-        [Required]
+        [Required(ErrorMessage = "You should provide a name value for the point of interest.")]
         [MaxLength(64)]
         public string Name { get; set; } = string.Empty;
 
