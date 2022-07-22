@@ -17,6 +17,13 @@ namespace CityInfo.API.Controllers
         [HttpGet("{id}")]
         public ActionResult<CityDto> GetCity(int id)
         {
+            // Passing Data to the API (complex binding mechanism)
+            // [FromBody] - inferred for complex types
+            // [FromHeader] - not inferred
+            // [FromRoute] - inferred for any action parameter name matching a parameter in the route template
+            // [FromQuery] - inferred for any other action parameters
+            // [FromForm] - inferred for action parameters of type IFormFile and IFormFileCollection
+
             // Status Codes:
             // Level 100 - Informational
             // Level 200 - OK (200 OK, 201 Created, 204 No Content)
