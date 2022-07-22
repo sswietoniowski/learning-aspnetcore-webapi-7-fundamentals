@@ -16,15 +16,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
-//app.UseAuthorization();
+// .NET 5.0
+app.UseRouting();
 
-//app.MapControllers();
+app.UseAuthorization();
 
-app.Run(async (context) =>
+app.UseEndpoints(endpoints =>
 {
-    await context.Response.WriteAsync("Hello World!");
+    endpoints.MapControllers();
 });
+
+// .NET 6
+//app.MapControllers();
 
 app.Run();
