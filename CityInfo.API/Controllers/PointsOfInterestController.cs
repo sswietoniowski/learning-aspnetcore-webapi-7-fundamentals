@@ -142,10 +142,10 @@ namespace CityInfo.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (pointOfInterestToPatch.Name is null)
-            {
-                ModelState.AddModelError("Name", "Name is required");
-            }
+            //if (pointOfInterestToPatch.Name is null)
+            //{
+            //    ModelState.AddModelError("Name", "Name is required");
+            //}
 
             TryValidateModel(pointOfInterestToPatch);
 
