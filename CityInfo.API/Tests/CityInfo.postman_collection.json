@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "df65032e-6312-4cde-b64e-2429a6296d54",
+		"name": "CityInfo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11288934"
+	},
+	"item": [
+		{
+			"name": "GET Cities",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GET City",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/cities/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"cities",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Points Of Interest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/cities/2/pointsofinterest",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"cities",
+						"2",
+						"pointsofinterest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Point Of Interest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/cities/1/pointsofinterest/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"cities",
+						"1",
+						"pointsofinterest",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

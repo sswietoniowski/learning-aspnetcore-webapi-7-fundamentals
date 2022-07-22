@@ -29,6 +29,6 @@ app.UseEndpoints(endpoints =>
 });
 
 // .NET 6
-//app.MapControllers();
+//app.MapControllers(); // <- contains UseRouting() & UseEndpoints() - not necessarily a good thing
 
 app.Run();

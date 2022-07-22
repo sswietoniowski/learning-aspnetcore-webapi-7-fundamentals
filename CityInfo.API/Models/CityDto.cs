@@ -12,5 +12,15 @@ namespace CityInfo.API.Models
         
         [MaxLength(256)]
         public string? Description { get; set; }
+
+        public int NumberOfPointsOfInterest
+        {
+            get
+            {
+                return PointsOfInterest.Count;
+            }
+        }
+
+        public ICollection<PointOfInterestDto> PointsOfInterest { get; set; } = new List<PointOfInterestDto>();
     }
 }
