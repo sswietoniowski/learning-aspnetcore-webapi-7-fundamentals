@@ -23,8 +23,6 @@ namespace CityInfo.API.Controllers
             {
                 _logger.LogInformation($"Called: {nameof(GetPointsOfInterest)}");
 
-                throw new Exception("Exception sample.");
-
                 var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
                 if (city is null)
