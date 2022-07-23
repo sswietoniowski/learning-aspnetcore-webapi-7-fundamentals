@@ -1,6 +1,7 @@
 using CityInfo.API.DataAccess.Data;
 using CityInfo.API.Services;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -30,6 +31,11 @@ builder.Services.AddControllers(options =>
 })
     .AddNewtonsoftJson()
     .AddXmlDataContractSerializerFormatters();
+
+builder.Services.AddDbContext<CityInfoDbContext>(options =>
+{
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
