@@ -41,7 +41,10 @@ builder.Services.AddDbContext<CityInfoDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// one way of implementing repository & UoW
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+// alternative (using something like facade)
+builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
