@@ -22,6 +22,7 @@ namespace CityInfo.API.DataAccess.DbContexts.CityInfoDbContext
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlite("Data Source=.\\default.db");
+                base.OnConfiguring(optionsBuilder);
             }
         }
     }
