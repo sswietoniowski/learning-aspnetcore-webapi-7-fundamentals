@@ -2,6 +2,7 @@
 using CityInfo.API.DataAccess.DbContexts.CityInfoDbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CityInfo.API.DataAccess.DbContexts.CityInfoDbContext.Migrations
 {
     [DbContext(typeof(CityInfoDbContext))]
-    partial class CityInfoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220723151056_SeedingData")]
+    partial class SeedingData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.7");
@@ -65,9 +67,6 @@ namespace CityInfo.API.DataAccess.DbContexts.CityInfoDbContext.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(64)
@@ -84,21 +83,18 @@ namespace CityInfo.API.DataAccess.DbContexts.CityInfoDbContext.Migrations
                         {
                             Id = 1,
                             CityId = 1,
-                            Description = "The most visited urban park in the USA.",
                             Name = "Central Park"
                         },
                         new
                         {
                             Id = 2,
                             CityId = 1,
-                            Description = "A 102-story skyscraper.",
                             Name = "Empire State Building"
                         },
                         new
                         {
                             Id = 3,
                             CityId = 3,
-                            Description = "",
                             Name = "Eifel Tower"
                         });
                 });

@@ -1,6 +1,5 @@
 ﻿using CityInfo.API.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace CityInfo.API.DataAccess.DbContexts.CityInfoDbContext
 {
@@ -24,6 +23,48 @@ namespace CityInfo.API.DataAccess.DbContexts.CityInfoDbContext
                 optionsBuilder.UseSqlite("Data Source=.\\default.db");
                 base.OnConfiguring(optionsBuilder);
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<City>().HasData(
+                new City("New York City")
+                {
+                    Id = 1,
+                    Description = "The one with that big park."
+                },
+                new City("Warsaw")
+                {
+                    Id = 2,
+                    Description = "The one with a mermaid."
+                },
+                new City("Paris")
+                {
+                    Id = 3,
+                    Description = "The one with that big tower."
+                }
+            );
+            
+            modelBuilder.Entity<PointOfInterest>().HasData(
+                new PointOfInterest("Central Park")
+                {
+                    Id = 1,
+                    Description = "The most visited urban park in the USA.",
+                    CityId = 1
+                },
+                new PointOfInterest("Empire State Building")
+                {
+                    Id = 2,
+                    Description = "A 102-story skyscraper.",
+                    CityId = 1
+                },
+                new PointOfInterest("Eifel Tower")
+                {
+                    Id = 3,
+                    Description = "",
+                    CityId = 3
+                }
+            );
         }
     }
 }
