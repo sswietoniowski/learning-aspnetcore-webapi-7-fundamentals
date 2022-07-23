@@ -32,7 +32,11 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
+#if DEBUG
 builder.Services.AddTransient<IMailService, LocalMailService>();
+#else
+builder.Services.AddTransient<IMailService, CloudMailService>();
+#endif
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
