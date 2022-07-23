@@ -8,9 +8,18 @@ namespace CityInfo.API.Controllers
     [Route("api/cities")]
     public class CitiesController : ControllerBase
     {
+        private readonly ILogger<CitiesController> _logger;
+
+        public CitiesController(ILogger<CitiesController> logger)
+        {
+            _logger = logger;
+        }
+        
         [HttpGet]
         public ActionResult<IEnumerable<CityDto>> GetCities()
         {
+            _logger.LogInformation($"Called: {nameof(GetCities)}");
+            
             return Ok(CitiesDataStore.Current.Cities);
         }
 
@@ -31,6 +40,8 @@ namespace CityInfo.API.Controllers
             // Level 400 - Client's Error (400 Bad Request, 401 Not Authorized, 403 Forbidden, 404 Not Found, 406 Not Acceptable, 409 Conflict)
             // Level 500 - Server's Error (500 Internal Server Error)
 
+            _logger.LogInformation($"Called: {nameof(GetCity)}");
+            
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(city => city.Id == id);
 
             if (city is null)

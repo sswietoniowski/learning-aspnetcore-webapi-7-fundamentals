@@ -8,16 +8,20 @@ namespace CityInfo.API.Controllers
     public class FilesController : ControllerBase
     {
         private readonly FileExtensionContentTypeProvider _fileExtensionContentTypeProvider;
+        private readonly ILogger<FilesController> _logger;
 
-        public FilesController(FileExtensionContentTypeProvider fileExtensionContentTypeProvider)
+        public FilesController(FileExtensionContentTypeProvider fileExtensionContentTypeProvider, ILogger<FilesController> logger)
         {
             _fileExtensionContentTypeProvider = fileExtensionContentTypeProvider
-                ?? throw new ArgumentNullException(nameof(fileExtensionContentTypeProvider));
+                                                ?? throw new ArgumentNullException(nameof(fileExtensionContentTypeProvider));
+            _logger = logger;
         }
 
         [HttpGet("{fileid}")]
         public ActionResult GetFile(string fileId)
         {
+            _logger.LogInformation($"Called: {nameof(GetFile)}");
+
             //FileContentResult result = new FileContentResult(new byte[0], "application/octet-stream");
             //FileStreamResult result = new FileStreamResult(new MemoryStream(new byte[0]), "application/octet-stream");
 

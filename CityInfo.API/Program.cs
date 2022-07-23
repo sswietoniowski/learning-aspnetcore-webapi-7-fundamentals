@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.StaticFiles;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,13 @@ builder.Services.AddControllers(options =>
     .AddXmlDataContractSerializerFormatters();
 
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
+
+// More info about how we can configure Serilog: https://blog.datalust.co/using-serilog-in-net-6/
+// Serilog configuration (with examples) can be found here: https://github.com/serilog/serilog-settings-configuration
+builder.Host.UseSerilog((context, loggerConfiguration) =>
+{
+    loggerConfiguration.ReadFrom.Configuration(context.Configuration);
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

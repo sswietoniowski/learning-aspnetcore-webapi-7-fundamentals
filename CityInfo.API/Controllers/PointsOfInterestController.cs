@@ -9,9 +9,18 @@ namespace CityInfo.API.Controllers
     [ApiController]
     public class PointsOfInterestController : ControllerBase
     {
+        private readonly ILogger<PointsOfInterestController> _logger;
+
+        public PointsOfInterestController(ILogger<PointsOfInterestController> logger)
+        {
+            _logger = logger;
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<PointOfInterestDto>> GetPointsOfInterest(int cityId)
         {
+            _logger.LogInformation($"Called: {nameof(GetPointsOfInterest)}");
+            
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
             if (city is null)
@@ -25,6 +34,8 @@ namespace CityInfo.API.Controllers
         [HttpGet("{pointofinterestid}", Name = "GetPointOfInterest")]
         public ActionResult<PointOfInterestDto> GetPointOfInterest(int cityId, int pointOfInterestId)
         {
+            _logger.LogInformation($"Called: {nameof(GetPointOfInterest)}");
+
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
             if (city is null)
@@ -55,6 +66,8 @@ namespace CityInfo.API.Controllers
 
             // Built-in validations are OK for simple use cases, in a more advanced scenario, we might use
             // something like FluentValidation to validate the model.
+
+            _logger.LogInformation($"Called: {nameof(CreatePointOfInterest)}");
 
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
@@ -89,6 +102,8 @@ namespace CityInfo.API.Controllers
         public IActionResult UpdatePointOfInterest(int cityId, int pointOfInterestId,
             [FromBody] PointOfInterestForUpdateDto pointOfInterest)
         {
+            _logger.LogInformation($"Called: {nameof(UpdatePointOfInterest)}");
+
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
             if (city is null)
@@ -114,6 +129,8 @@ namespace CityInfo.API.Controllers
         public IActionResult PartiallyUpdatePointOfInterest(int cityId, int pointOfInterestId,
             [FromBody] JsonPatchDocument<PointOfInterestForUpdateDto> patchDoc)
         {
+            _logger.LogInformation($"Called: {nameof(PartiallyUpdatePointOfInterest)}");
+
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
             if (city is null)
@@ -163,6 +180,8 @@ namespace CityInfo.API.Controllers
         [HttpDelete("{pointofinterestid}")]
         public IActionResult DeletePointOfInterest(int cityId, int pointOfInterestId)
         {
+            _logger.LogInformation($"Called: {nameof(DeletePointOfInterest)}");
+
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
             if (city is null)
