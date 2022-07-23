@@ -1,9 +1,17 @@
-﻿namespace CityInfo.API.Services
+﻿using Microsoft.Extensions.Options;
+
+namespace CityInfo.API.Services
 {
     public class LocalMailService : IMailService
     {
-        private string _mailTo = "admin@demo.com";
-        private string _mailFrom = "noreply@demo.com";
+        private string _mailTo = string.Empty;
+        private string _mailFrom = string.Empty;
+
+        public LocalMailService(IOptions<MailSettingsConfiguration> configurationSection)
+        {
+            _mailTo = configurationSection.Value.MailTo;
+            _mailFrom = configurationSection.Value.MailFrom;
+        }
 
         public void Send(string subject, string message)
         {

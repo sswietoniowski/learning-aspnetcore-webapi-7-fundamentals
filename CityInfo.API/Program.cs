@@ -41,6 +41,10 @@ builder.Services.AddTransient<IMailService, CloudMailService>();
 
 builder.Services.AddSingleton<CitiesDataStore>();
 
+builder.Services.AddOptions<MailSettingsConfiguration>()
+    .Bind(builder.Configuration.GetSection("MailSettings"))
+    .ValidateDataAnnotations(); ;
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
