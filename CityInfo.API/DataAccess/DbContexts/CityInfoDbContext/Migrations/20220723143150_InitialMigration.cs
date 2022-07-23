@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace CityInfo.API.DataAccess.Data.Migrations
+namespace CityInfo.API.DataAccess.DbContexts.CityInfoDbContext.Migrations
 {
     public partial class InitialMigration : Migration
     {
