@@ -9,20 +9,22 @@ namespace CityInfo.API.Controllers
     public class CitiesController : ControllerBase
     {
         private readonly ILogger<CitiesController> _logger;
+        private readonly CitiesDataStore _citiesDataStore;
 
-        public CitiesController(ILogger<CitiesController> logger)
+        public CitiesController(ILogger<CitiesController> logger, CitiesDataStore citiesDataStore)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             // DI with constructor is preferred but you might still get the service like this:
             //HttpContext.RequestServices.GetService(typeof(ILogger<CitiesController>));
+            _citiesDataStore = citiesDataStore ?? throw new ArgumentNullException(nameof(citiesDataStore));
         }
-        
+
         [HttpGet]
         public ActionResult<IEnumerable<CityDto>> GetCities()
         {
             _logger.LogInformation($"Called: {nameof(GetCities)}");
-            
-            return Ok(CitiesDataStore.Current.Cities);
+
+            return Ok(_citiesDataStore.Cities);
         }
 
         [HttpGet("{id}")]
@@ -43,8 +45,8 @@ namespace CityInfo.API.Controllers
             // Level 500 - Server's Error (500 Internal Server Error)
 
             _logger.LogInformation($"Called: {nameof(GetCity)}");
-            
-            var city = CitiesDataStore.Current.Cities.FirstOrDefault(city => city.Id == id);
+
+            var city = _citiesDataStore.Cities.FirstOrDefault(city => city.Id == id);
 
             if (city is null)
             {
