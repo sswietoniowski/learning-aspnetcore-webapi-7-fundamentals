@@ -11,6 +11,9 @@ namespace CityInfo.API.Services
         // public LocalMailService(IConfiguration configuration)
         public LocalMailService(IOptions<MailSettingsConfiguration> configurationSection)
         {
+            // Differences between IOptionsSnapshot and IOptionsMonitor:
+            // https://stackoverflow.com/questions/50788988/difference-between-ioptionsmonitor-vs-ioptionssnapshot
+
             // Alternative:
             // _mailTo = configuration.GetValue<string>("MailSettings:MailTo");
             // or
