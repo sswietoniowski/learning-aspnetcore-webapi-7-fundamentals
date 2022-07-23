@@ -14,12 +14,16 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
+
 // More info about how we can configure Serilog: https://blog.datalust.co/using-serilog-in-net-6/
 // Serilog configuration (with examples) can be found here: https://github.com/serilog/serilog-settings-configuration
-builder.Host.UseSerilog((context, loggerConfiguration) =>
-{
-    loggerConfiguration.ReadFrom.Configuration(context.Configuration);
-});
+// Third-party logging providers: https://docs.microsoft.com/en-us/dotnet/core/extensions/logging-providers#third-party-logging-providers
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+//builder.Host.UseSerilog((context, loggerConfiguration) =>
+//{
+//    loggerConfiguration.ReadFrom.Configuration(context.Configuration);
+//});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

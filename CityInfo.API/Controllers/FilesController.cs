@@ -14,7 +14,7 @@ namespace CityInfo.API.Controllers
         {
             _fileExtensionContentTypeProvider = fileExtensionContentTypeProvider
                                                 ?? throw new ArgumentNullException(nameof(fileExtensionContentTypeProvider));
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpGet("{fileid}")]

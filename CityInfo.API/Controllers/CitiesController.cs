@@ -12,7 +12,9 @@ namespace CityInfo.API.Controllers
 
         public CitiesController(ILogger<CitiesController> logger)
         {
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            // DI with constructor is preferred but you might still get the service like this:
+            //HttpContext.RequestServices.GetService(typeof(ILogger<CitiesController>));
         }
         
         [HttpGet]

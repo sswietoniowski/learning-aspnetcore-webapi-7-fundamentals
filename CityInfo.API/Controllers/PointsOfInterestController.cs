@@ -13,22 +13,42 @@ namespace CityInfo.API.Controllers
 
         public PointsOfInterestController(ILogger<PointsOfInterestController> logger)
         {
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<PointOfInterestDto>> GetPointsOfInterest(int cityId)
         {
-            _logger.LogInformation($"Called: {nameof(GetPointsOfInterest)}");
-            
-            var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
-
-            if (city is null)
+            try
             {
-                return NotFound();
-            }
+                _logger.LogInformation($"Called: {nameof(GetPointsOfInterest)}");
 
-            return Ok(city.PointsOfInterest);
+                throw new Exception("Exception sample.");
+
+                var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
+
+                if (city is null)
+                {
+                    // Logged events have severity (in an order from the least important to the most important):
+                    // Trace
+                    // Debug
+                    // Information
+                    // Warning
+                    // Error
+                    // Critical
+                    _logger.LogWarning($"City with id {cityId} wasn't found when accessing points of interest");
+
+                    return NotFound();
+                }
+
+                return Ok(city.PointsOfInterest);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogCritical($"Exception while getting points of interest for city with id {cityId}.", exception);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "A problem happened while handling your request.");
+            }
         }
 
         [HttpGet("{pointofinterestid}", Name = "GetPointOfInterest")]
