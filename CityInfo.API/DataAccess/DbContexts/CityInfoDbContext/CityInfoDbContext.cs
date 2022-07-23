@@ -15,5 +15,14 @@ namespace CityInfo.API.DataAccess.DbContexts.CityInfoDbContext
             : base(options)
         {
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // We could configure DbContext inside Program class using DI or by overriding some logic inside this method
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=.\\default.db");
+            }
+        }
     }
 }
