@@ -1,5 +1,5 @@
 ﻿using CityInfo.API.DataAccess.Data;
-using CityInfo.API.Models;
+using CityInfo.API.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.API.Controllers

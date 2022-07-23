@@ -1,4 +1,4 @@
-﻿using CityInfo.API.Models;
+﻿using CityInfo.API.DTOs;
 
 namespace CityInfo.API.DataAccess.Data
 {

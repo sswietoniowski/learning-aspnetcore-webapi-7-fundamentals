@@ -1,16 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CityInfo.API.Models
+namespace CityInfo.API.DTOs
 {
     public class PointOfInterestDto
     {
-        [Key]
         public int Id { get; set; }
 
-        [MaxLength(64)]
         public string Name { get; set; } = string.Empty;
 
-        [MaxLength(256)]
         public string? Description { get; set; }
     }
 
@@ -24,7 +21,7 @@ namespace CityInfo.API.Models
         public string? Description { get; set; }
     }
 
-    public class PointOfInterestForUpdateDto 
+    public class PointOfInterestForUpdateDto
     {
         [Required(ErrorMessage = "You should provide a name value for the point of interest.")]
         [MaxLength(64)]
