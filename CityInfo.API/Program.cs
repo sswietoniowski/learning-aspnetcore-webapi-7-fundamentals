@@ -1,5 +1,8 @@
+using System.Reflection;
 using CityInfo.API.DataAccess.Data;
 using CityInfo.API.DataAccess.DbContexts.CityInfoDbContext;
+using CityInfo.API.DataAccess.Repositories;
+using CityInfo.API.DataAccess.Repositories.Interfaces;
 using CityInfo.API.Services;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +40,10 @@ builder.Services.AddDbContext<CityInfoDbContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
