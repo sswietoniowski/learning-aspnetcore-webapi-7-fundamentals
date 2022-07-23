@@ -33,7 +33,7 @@ namespace CityInfo.API.DataAccess.DbContexts.CityInfoDbContext.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
 
                     b.HasData(
                         new
@@ -77,7 +77,7 @@ namespace CityInfo.API.DataAccess.DbContexts.CityInfoDbContext.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("PointsOfInterest");
+                    b.ToTable("PointsOfInterest", (string)null);
 
                     b.HasData(
                         new
