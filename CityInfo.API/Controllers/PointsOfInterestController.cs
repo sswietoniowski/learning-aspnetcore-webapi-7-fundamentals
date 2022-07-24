@@ -69,7 +69,7 @@ namespace CityInfo.API.Controllers
             }
             var pointOfInterestDto = _mapper.Map<PointOfInterestDto?>(pointOfInterest);
 
-            return Ok(pointOfInterest);
+            return Ok(pointOfInterestDto);
         }
 
         [HttpPost]
