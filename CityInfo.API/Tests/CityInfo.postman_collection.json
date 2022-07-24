@@ -32,11 +32,6 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "",
-						"value": "",
-						"type": "text"
-					},
-					{
 						"key": "Accept",
 						"value": "application/xml",
 						"type": "text"
@@ -63,7 +58,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:{{portNumber}}/api/cities/1",
+					"raw": "https://localhost:{{portNumber}}/api/cities/1?includePointsOfInterest=true",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -73,6 +68,12 @@
 						"api",
 						"cities",
 						"1"
+					],
+					"query": [
+						{
+							"key": "includePointsOfInterest",
+							"value": "true"
+						}
 					]
 				}
 			},
