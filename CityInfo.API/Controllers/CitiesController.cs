@@ -1,4 +1,6 @@
-﻿using CityInfo.API.DataAccess.Data;
+﻿using AutoMapper;
+using CityInfo.API.DataAccess.Data;
+using CityInfo.API.DataAccess.Repositories;
 using CityInfo.API.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,26 +11,31 @@ namespace CityInfo.API.Controllers
     public class CitiesController : ControllerBase
     {
         private readonly ILogger<CitiesController> _logger;
-        private readonly CitiesDataStore _citiesDataStore;
+        private readonly ICityInfoRepository _cityInfoRepository;
+        private readonly IMapper _mapper;
 
-        public CitiesController(ILogger<CitiesController> logger, CitiesDataStore citiesDataStore)
+        public CitiesController(ILogger<CitiesController> logger, CitiesDataStore citiesDataStore, ICityInfoRepository cityInfoRepository, IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             // DI with constructor is preferred but you might still get the service like this:
             //HttpContext.RequestServices.GetService(typeof(ILogger<CitiesController>));
-            _citiesDataStore = citiesDataStore ?? throw new ArgumentNullException(nameof(citiesDataStore));
+            _cityInfoRepository = cityInfoRepository ?? throw new ArgumentNullException(nameof(cityInfoRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CityDto>> GetCities()
+        public async Task<ActionResult<IEnumerable<CityWithoutPointOfInterestDto>>> GetCities()
         {
             _logger.LogInformation($"Called: {nameof(GetCities)}");
 
-            return Ok(_citiesDataStore.Cities);
+            var cities = await _cityInfoRepository.GetCitiesAsync();
+            var citiesDto = _mapper.Map<IEnumerable<CityWithoutPointOfInterestDto>>(cities);
+
+            return Ok(citiesDto);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<CityDto> GetCity(int id)
+        public async Task<IActionResult> GetCity(int id, [FromQuery] bool includePointsOfInterest = false)
         {
             // Passing Data to the API (complex binding mechanism)
             // [FromBody] - inferred for complex types
@@ -46,14 +53,23 @@ namespace CityInfo.API.Controllers
 
             _logger.LogInformation($"Called: {nameof(GetCity)}");
 
-            var city = _citiesDataStore.Cities.FirstOrDefault(city => city.Id == id);
+            var city = await _cityInfoRepository.GetCityAsync(id, includePointsOfInterest);
 
             if (city is null)
             {
                 return NotFound();
             }
 
-            return Ok(city);
+            if (includePointsOfInterest)
+            {
+                var cityDto = _mapper.Map<CityDto>(city);
+                return Ok(cityDto);
+            }
+            else
+            {
+                var cityDto = _mapper.Map<CityWithoutPointOfInterestDto>(city);
+                return Ok(cityDto);
+            }
         }
     }
 }

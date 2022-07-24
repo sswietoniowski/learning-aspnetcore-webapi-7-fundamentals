@@ -1,4 +1,6 @@
-﻿using CityInfo.API.DataAccess.Data;
+﻿using AutoMapper;
+using CityInfo.API.DataAccess.Data;
+using CityInfo.API.DataAccess.Repositories;
 using CityInfo.API.DTOs;
 using CityInfo.API.Services;
 using Microsoft.AspNetCore.JsonPatch;
@@ -13,38 +15,33 @@ namespace CityInfo.API.Controllers
         private readonly ILogger<PointsOfInterestController> _logger;
         private readonly IMailService _mailService;
         private readonly CitiesDataStore _citiesDataStore;
+        private readonly ICityInfoRepository _cityInfoRepository;
+        private readonly IMapper _mapper;
 
-        public PointsOfInterestController(ILogger<PointsOfInterestController> logger, IMailService mailService, CitiesDataStore citiesDataStore)
+        public PointsOfInterestController(ILogger<PointsOfInterestController> logger,
+            IMailService mailService,
+            CitiesDataStore citiesDataStore,
+            ICityInfoRepository cityInfoRepository, IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
             _citiesDataStore = citiesDataStore ?? throw new ArgumentNullException(nameof(citiesDataStore));
+            _cityInfoRepository = cityInfoRepository ?? throw new ArgumentNullException(nameof(cityInfoRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<PointOfInterestDto>> GetPointsOfInterest(int cityId)
+        public async Task<ActionResult<IEnumerable<PointOfInterestDto>>> GetPointsOfInterest(int cityId)
         {
             try
             {
                 _logger.LogInformation($"Called: {nameof(GetPointsOfInterest)}");
 
-                var city = _citiesDataStore.Cities.FirstOrDefault(c => c.Id == cityId);
 
-                if (city is null)
-                {
-                    // Logged events have severity (in an order from the least important to the most important):
-                    // Trace
-                    // Debug
-                    // Information
-                    // Warning
-                    // Error
-                    // Critical
-                    _logger.LogWarning($"City with id {cityId} wasn't found when accessing points of interest");
+                var pointsOfInterest = await _cityInfoRepository.GetPointsOfInterestForCityAsync(cityId);
+                var pointsOfInterestDto = _mapper.Map<IEnumerable<PointOfInterestDto>>(pointsOfInterest);
 
-                    return NotFound();
-                }
-
-                return Ok(city.PointsOfInterest);
+                return Ok(pointsOfInterestDto);
             }
             catch (Exception exception)
             {
@@ -55,24 +52,16 @@ namespace CityInfo.API.Controllers
         }
 
         [HttpGet("{pointofinterestid}", Name = "GetPointOfInterest")]
-        public ActionResult<PointOfInterestDto> GetPointOfInterest(int cityId, int pointOfInterestId)
+        public async Task<ActionResult<PointOfInterestDto>> GetPointOfInterest(int cityId, int pointOfInterestId)
         {
             _logger.LogInformation($"Called: {nameof(GetPointOfInterest)}");
 
-            var city = _citiesDataStore.Cities.FirstOrDefault(c => c.Id == cityId);
-
-            if (city is null)
-            {
-                return NotFound();
-            }
-
-            var pointOfInterest =
-                city.PointsOfInterest.FirstOrDefault(pointOfInterest => pointOfInterest.Id == pointOfInterestId);
-
+            var pointOfInterest = await _cityInfoRepository.GetPointOfInterestForCityAsync(cityId, pointOfInterestId);
             if (pointOfInterest is null)
             {
                 return NotFound();
             }
+            var pointOfInterestDto = _mapper.Map<PointOfInterestDto?>(pointOfInterest);
 
             return Ok(pointOfInterest);
         }

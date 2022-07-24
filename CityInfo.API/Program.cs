@@ -46,7 +46,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // alternative (using something like facade)
 builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>();
 
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
