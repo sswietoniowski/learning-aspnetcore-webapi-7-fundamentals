@@ -38,16 +38,11 @@ namespace CityInfo.API.Services
             return await _context.Cities.AnyAsync(city => city.Id == cityId);
         }
 
-        public async Task CreateCityAsync(City city)
+        public async Task AddCityAsync(City city)
         {
             _context.Cities.Add(city);
         }
 
-        public async Task UpdateCityAsync(City city)
-        {
-            _context.Cities.Update(city);
-        }
-        
         public async Task DeleteCityAsync(City city)
         {
             _context.Cities.Remove(city);
@@ -73,12 +68,6 @@ namespace CityInfo.API.Services
             {
                 city.PointsOfInterest.Add(pointOfInterest);
             }
-        }
-
-        public async Task UpdatePointOfInterestForCityAsync(int cityId, PointOfInterest pointOfInterest)
-        {
-            _context.PointsOfInterest.Update(pointOfInterest);
-            await _context.SaveChangesAsync();
         }
 
         public async Task DeletePointOfInterestForCityAsync(int cityId, PointOfInterest pointOfInterest)
