@@ -33,7 +33,10 @@ builder.Services.AddControllers(options =>
 {
     options.ReturnHttpNotAcceptable = true;
 })
-    .AddNewtonsoftJson()
+    .AddNewtonsoftJson(settings =>
+    {
+        settings.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    })
     .AddXmlDataContractSerializerFormatters();
 
 builder.Services.AddDbContext<CityInfoDbContext>(options =>

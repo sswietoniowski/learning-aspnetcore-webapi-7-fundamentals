@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CityInfo.API.DataAccess.Data;
+using CityInfo.API.DataAccess.Entities;
 using CityInfo.API.DataAccess.Repositories;
 using CityInfo.API.DTOs;
 using CityInfo.API.Services;
@@ -61,10 +62,8 @@ namespace CityInfo.API.Controllers
         public async Task<ActionResult<PointOfInterestDto>> GetPointOfInterest(int cityId, int pointOfInterestId)
         {
             _logger.LogInformation($"Called: {nameof(GetPointOfInterest)}");
-
-            var cityExists = await _cityInfoRepository.CityExistsAsync(cityId);
-
-            if (!cityExists)
+            
+            if (!await _cityInfoRepository.CityExistsAsync(cityId))
             {
                 return NotFound();
             }
@@ -80,7 +79,7 @@ namespace CityInfo.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<PointOfInterestDto> CreatePointOfInterest(int cityId,
+        public async Task<ActionResult<PointOfInterestDto>> CreatePointOfInterest(int cityId,
             [FromBody] PointOfInterestForCreationDto pointOfInterest)
         {
             //// Not necessary due to the ApiController attribute, that causes model checking
@@ -94,25 +93,17 @@ namespace CityInfo.API.Controllers
 
             _logger.LogInformation($"Called: {nameof(CreatePointOfInterest)}");
 
-            var city = _citiesDataStore.Cities.FirstOrDefault(c => c.Id == cityId);
-
-            if (city is null)
+            if (!await _cityInfoRepository.CityExistsAsync(cityId))
             {
                 return NotFound();
             }
 
-            // for demo purposes only :-)!
-            var maxPointOfInterestId = _citiesDataStore.Cities.SelectMany(
-                c => c.PointsOfInterest).Max(p => p.Id);
+            var finalPointOfInterest = _mapper.Map<PointOfInterest>(pointOfInterest);
 
-            var finalPointOfInterest = new PointOfInterestDto()
-            {
-                Id = ++maxPointOfInterestId,
-                Name = pointOfInterest.Name,
-                Description = pointOfInterest.Description
-            };
+            await _cityInfoRepository.AddPointOfInterestForCityAsync(cityId, finalPointOfInterest);
+            await _cityInfoRepository.SaveChangesAsync();
 
-            city.PointsOfInterest.Add(finalPointOfInterest);
+            var createdPointOfInterest = _mapper.Map<PointOfInterestDto>(finalPointOfInterest);
 
             return CreatedAtRoute(
                 "GetPointOfInterest",
@@ -120,7 +111,7 @@ namespace CityInfo.API.Controllers
                 {
                     cityId,
                     pointOfInterestId = finalPointOfInterest.Id
-                }, finalPointOfInterest);
+                }, createdPointOfInterest);
         }
 
         [HttpPut("{pointofinterestid}")]
