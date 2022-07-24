@@ -62,6 +62,13 @@ namespace CityInfo.API.Controllers
         {
             _logger.LogInformation($"Called: {nameof(GetPointOfInterest)}");
 
+            var cityExists = await _cityInfoRepository.CityExistsAsync(cityId);
+
+            if (!cityExists)
+            {
+                return NotFound();
+            }
+
             var pointOfInterest = await _cityInfoRepository.GetPointOfInterestForCityAsync(cityId, pointOfInterestId);
             if (pointOfInterest is null)
             {
