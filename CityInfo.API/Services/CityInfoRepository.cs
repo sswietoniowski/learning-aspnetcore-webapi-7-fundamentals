@@ -48,5 +48,10 @@ namespace CityInfo.API.Services
                 .AsNoTracking()
                 .FirstOrDefaultAsync(point => point.CityId == cityId && point.Id == pointOfInterestId);
         }
+
+        public async Task<bool> CityExistsAsync(int cityId)
+        {
+            return await _context.Cities.AnyAsync(city => city.Id == cityId);
+        }
     }
 }
