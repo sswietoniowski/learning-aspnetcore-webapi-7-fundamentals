@@ -27,7 +27,9 @@ namespace CityInfo.API.Services
             {
                 return await GetCitiesAsync();
             }
-            
+
+            name = name.Trim();
+
             return await _context.Cities
                 .Where(city => city.Name == name)
                 .OrderBy(city => city.Name)
