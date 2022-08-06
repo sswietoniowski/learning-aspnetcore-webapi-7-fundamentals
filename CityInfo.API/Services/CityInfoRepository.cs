@@ -20,7 +20,7 @@ namespace CityInfo.API.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<City>> GetCitiesAsync(string? name, string? query, int pageNumber, int pageSize)
+        public async Task<(IEnumerable<City>, PaginationMetadata)> GetCitiesAsync(string? name, string? query, int pageNumber, int pageSize)
         {
             var collection = _context.Cities as IQueryable<City>; // we want to gather all the benefits of the deffered execution
 
@@ -38,11 +38,16 @@ namespace CityInfo.API.Services
                     || (city.Description != null && city.Description.Contains(query)));
             }
 
-            return await collection
+            var totalItemCount = await collection.CountAsync();
+            var paginationMetadata = new PaginationMetadata(totalItemCount, pageSize, pageNumber);
+
+            var collectionToReturn = await collection
                 .OrderBy(city => city.Name)
                 .Skip(pageSize * (pageNumber - 1)) // must be last :-)!
                 .Take(pageSize)
                 .ToListAsync();
+            
+            return (collectionToReturn, paginationMetadata);
         }
 
         public async Task<City?> GetCityAsync(int cityId, bool includePointsOfInterest)
