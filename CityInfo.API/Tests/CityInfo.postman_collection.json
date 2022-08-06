@@ -27,6 +27,32 @@
 			"response": []
 		},
 		{
+			"name": "GET Cities (filtering)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/cities?filter_name=Warsaw",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"cities"
+					],
+					"query": [
+						{
+							"key": "filter_name",
+							"value": "Warsaw"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GET Cities (XML format)",
 			"request": {
 				"method": "GET",

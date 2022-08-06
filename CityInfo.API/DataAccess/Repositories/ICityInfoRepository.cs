@@ -8,6 +8,7 @@ namespace CityInfo.API.DataAccess.Repositories
         // Whether we would return IEnumerable or IQueryable (and by that we would give the developer more options to query the data at the expense of leaking the
         // query logic) is a matter of discussion.
         Task<IEnumerable<City>> GetCitiesAsync();
+        Task<IEnumerable<City>> GetCitiesAsync(string? name);
         Task<City?> GetCityAsync(int cityId, bool includePointsOfInterest);
         Task<bool> CityExistsAsync(int cityId);
         Task<IEnumerable<PointOfInterest>> GetPointsOfInterestForCityAsync(int cityId);
