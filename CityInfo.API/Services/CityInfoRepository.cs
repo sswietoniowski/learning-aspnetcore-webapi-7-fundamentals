@@ -20,14 +20,9 @@ namespace CityInfo.API.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<City>> GetCitiesAsync(string? name, string? query)
+        public async Task<IEnumerable<City>> GetCitiesAsync(string? name, string? query, int pageNumber, int pageSize)
         {
-            if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(query))
-            {
-                return await GetCitiesAsync();
-            }
-
-            var collection = _context.Cities as IQueryable<City>;
+            var collection = _context.Cities as IQueryable<City>; // we want to gather all the benefits of the deffered execution
 
             if (!string.IsNullOrWhiteSpace(name))
             {
@@ -45,6 +40,8 @@ namespace CityInfo.API.Services
 
             return await collection
                 .OrderBy(city => city.Name)
+                .Skip(pageSize * (pageNumber - 1)) // must be last :-)!
+                .Take(pageSize)
                 .ToListAsync();
         }
 

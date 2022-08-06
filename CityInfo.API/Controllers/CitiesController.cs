@@ -10,6 +10,10 @@ namespace CityInfo.API.Controllers
     [Route("api/cities")]
     public class CitiesController : ControllerBase
     {
+        private const int DefaultCitiesPageNumber = 1;
+        private const int DefaultCitiesPageSize = 10;
+        private const int MaxCitiesPageSize = 50;
+
         private readonly ILogger<CitiesController> _logger;
         private readonly ICityInfoRepository _cityInfoRepository;
         private readonly IMapper _mapper;
@@ -26,11 +30,24 @@ namespace CityInfo.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CityWithoutPointOfInterestDto>>> GetCities(
             [FromQuery(Name = "filter_name")] string? name,
-            [FromQuery(Name = "search_query")] string? query)
+            [FromQuery(Name = "search_query")] string? query,
+            int pageNumber = DefaultCitiesPageNumber, int pageSize = DefaultCitiesPageSize)
         {
             _logger.LogInformation($"Called: {nameof(GetCities)}");
 
-            var cities = await _cityInfoRepository.GetCitiesAsync(name, query);
+            if (pageNumber <= 0)
+            {
+                ModelState.AddModelError(nameof(pageNumber), "Page number should be positive number");
+                return BadRequest(ModelState);
+            }
+
+            if (pageSize > MaxCitiesPageSize)
+            {
+                _logger.LogWarning($"page size ({pageSize}) was adjusted beacause it was greater than the maximum page size {MaxCitiesPageSize}");
+                pageSize = MaxCitiesPageSize;
+            }
+
+            var cities = await _cityInfoRepository.GetCitiesAsync(name, query, pageNumber, pageSize);
             var citiesDto = _mapper.Map<IEnumerable<CityWithoutPointOfInterestDto>>(cities);
 
             return Ok(citiesDto);
