@@ -53,6 +53,62 @@
 			"response": []
 		},
 		{
+			"name": "GET Cities (searching)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/cities?search_query=big",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"cities"
+					],
+					"query": [
+						{
+							"key": "search_query",
+							"value": "big"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Cities (filtering+searching)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/cities?filter_name=Paris&search_query=big",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"cities"
+					],
+					"query": [
+						{
+							"key": "filter_name",
+							"value": "Paris"
+						},
+						{
+							"key": "search_query",
+							"value": "big"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GET Cities (XML format)",
 			"request": {
 				"method": "GET",
