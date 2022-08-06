@@ -1,6 +1,5 @@
 ﻿using CityInfo.API.DataAccess.DbContexts.CityInfoDbContext;
 using CityInfo.API.DataAccess.Entities;
-using CityInfo.API.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace CityInfo.API.Services
@@ -21,17 +20,30 @@ namespace CityInfo.API.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<City>> GetCitiesAsync(string? name)
+        public async Task<IEnumerable<City>> GetCitiesAsync(string? name, string? query)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(query))
             {
                 return await GetCitiesAsync();
             }
 
-            name = name.Trim();
+            var collection = _context.Cities as IQueryable<City>;
 
-            return await _context.Cities
-                .Where(city => city.Name == name)
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                name = name.Trim();
+                collection = collection.Where(city => city.Name == name);
+            }
+
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                query = query.Trim();
+                collection = collection.Where(city =>
+                    city.Name.Contains(query)
+                    || (city.Description != null && city.Description.Contains(query)));
+            }
+
+            return await collection
                 .OrderBy(city => city.Name)
                 .ToListAsync();
         }

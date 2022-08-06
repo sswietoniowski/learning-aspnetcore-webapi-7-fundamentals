@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CityInfo.API.DataAccess.Data;
 using CityInfo.API.DataAccess.Entities;
-using CityInfo.API.DataAccess.Repositories;
 using CityInfo.API.DTOs;
 using CityInfo.API.Services;
 using Microsoft.AspNetCore.JsonPatch;

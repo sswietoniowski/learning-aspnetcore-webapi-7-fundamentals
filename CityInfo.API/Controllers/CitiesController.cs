@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CityInfo.API.DataAccess.Data;
-using CityInfo.API.DataAccess.Repositories;
 using CityInfo.API.DTOs;
+using CityInfo.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.API.Controllers
@@ -24,11 +24,13 @@ namespace CityInfo.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CityWithoutPointOfInterestDto>>> GetCities([FromQuery(Name = "filter_name")] string? name)
+        public async Task<ActionResult<IEnumerable<CityWithoutPointOfInterestDto>>> GetCities(
+            [FromQuery(Name = "filter_name")] string? name,
+            [FromQuery(Name = "search_query")] string? query)
         {
             _logger.LogInformation($"Called: {nameof(GetCities)}");
 
-            var cities = await _cityInfoRepository.GetCitiesAsync(name);
+            var cities = await _cityInfoRepository.GetCitiesAsync(name, query);
             var citiesDto = _mapper.Map<IEnumerable<CityWithoutPointOfInterestDto>>(cities);
 
             return Ok(citiesDto);
