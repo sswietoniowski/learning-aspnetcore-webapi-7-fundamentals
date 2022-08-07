@@ -82,7 +82,9 @@ namespace CityInfo.API.Controllers
 
             var tokenToReturn = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
 
-            return Accepted(tokenToReturn);
+            // You can test generated token contents here: https://jwt.io/
+
+            return Accepted(new { Token = tokenToReturn });
         }
 
         private CityInfoUser ValidateUserCredentials(string username, string password)

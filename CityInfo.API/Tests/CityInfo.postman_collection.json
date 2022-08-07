@@ -387,6 +387,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "OPTIONS Authenticate - Login",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserName\": \"jdoe@unknown.com\",\r\n    \"Password\": \"Very$ecretP@ssw0rd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:{{portNumber}}/api/authentication/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "{{portNumber}}",
+					"path": [
+						"api",
+						"authentication",
+						"login"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
