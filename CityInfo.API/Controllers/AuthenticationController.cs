@@ -91,7 +91,7 @@ namespace CityInfo.API.Controllers
         {
             // we're assuming that the credentials are valid (just for the demo purposes)
             return new CityInfoUser(
-                1, username ?? "", "John", "Doe", "Earth");
+                1, username ?? "", "John", "Doe", "Warsaw");
         }
     }
 }
