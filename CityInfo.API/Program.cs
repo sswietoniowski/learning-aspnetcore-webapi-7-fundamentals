@@ -6,13 +6,18 @@ using CityInfo.API.DataAccess.Repositories.Interfaces;
 using CityInfo.API.Services;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
+using NLog.Web;
 using Serilog;
 
-Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Debug()
-    .WriteTo.Console()
-    .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
-    .CreateLogger();
+// Serilog
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Debug()
+//    .WriteTo.Console()
+//    .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
+//    .CreateLogger();
+
+// NLog
+NLog.LogManager.Setup().LoadConfigurationFromAppSettings();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +30,13 @@ var builder = WebApplication.CreateBuilder(args);
 //{
 //    loggerConfiguration.ReadFrom.Configuration(context.Configuration);
 //});
-builder.Host.UseSerilog();
+//builder.Host.UseSerilog();
+
+// replaced Serilog with NLog using this doc: https://github.com/NLog/NLog/wiki/Getting-started-with-ASP.NET-Core-6
+builder.Host.UseNLog();
+// logging NLog logs to the MSSQL Database:
+// https://towardsdev.com/writing-logs-into-sql-server-with-nlog-and-net-6-0-fe212f2f6d19
+
 
 // Add services to the container.
 
