@@ -95,6 +95,17 @@ builder.Services.AddAuthentication("Bearer")
         };
     });
 
+// Authorization Policy (ABAC - Access Based Authorization)
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("MustBeFromWarsaw",
+        policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.RequireClaim("city", "Warsaw");
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

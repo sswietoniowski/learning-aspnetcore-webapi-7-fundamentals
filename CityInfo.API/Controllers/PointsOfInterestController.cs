@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CityInfo.API.Controllers
 {
     [Route("api/cities/{cityId}/pointsofinterest")]
-    [Authorize]
+    [Authorize(Policy = "MustBeFromWarsaw")]
     [ApiController]
     public class PointsOfInterestController : ControllerBase
     {
@@ -36,7 +36,7 @@ namespace CityInfo.API.Controllers
         public async Task<ActionResult<IEnumerable<PointOfInterestDto>>> GetPointsOfInterest(int cityId)
         {
             try
-            {                
+            {
                 _logger.LogInformation($"Called: {nameof(GetPointsOfInterest)}");
 
                 var cityName = User.Claims.FirstOrDefault(c => c.Type == "city")?.Value;
