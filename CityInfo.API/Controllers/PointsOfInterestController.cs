@@ -3,12 +3,14 @@ using CityInfo.API.DataAccess.Data;
 using CityInfo.API.DataAccess.Entities;
 using CityInfo.API.DTOs;
 using CityInfo.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.API.Controllers
 {
     [Route("api/cities/{cityId}/pointsofinterest")]
+    [Authorize]
     [ApiController]
     public class PointsOfInterestController : ControllerBase
     {
@@ -61,7 +63,7 @@ namespace CityInfo.API.Controllers
         public async Task<ActionResult<PointOfInterestDto>> GetPointOfInterest(int cityId, int pointOfInterestId)
         {
             _logger.LogInformation($"Called: {nameof(GetPointOfInterest)}");
-            
+
             if (!await _cityInfoRepository.CityExistsAsync(cityId))
             {
                 return NotFound();

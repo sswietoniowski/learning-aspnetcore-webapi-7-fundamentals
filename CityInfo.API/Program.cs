@@ -1,4 +1,3 @@
-using System.Reflection;
 using CityInfo.API.DataAccess.Data;
 using CityInfo.API.DataAccess.DbContexts.CityInfoDbContext;
 using CityInfo.API.DataAccess.Repositories;
@@ -6,18 +5,19 @@ using CityInfo.API.DataAccess.Repositories.Interfaces;
 using CityInfo.API.Services;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
-using NLog.Web;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Text;
 
-// Serilog
-//Log.Logger = new LoggerConfiguration()
-//    .MinimumLevel.Debug()
-//    .WriteTo.Console()
-//    .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
-//    .CreateLogger();
+//Serilog
+Log.Logger = new LoggerConfiguration()
+   .MinimumLevel.Debug()
+   .WriteTo.Console()
+   .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
+   .CreateLogger();
 
 // NLog
-NLog.LogManager.Setup().LoadConfigurationFromAppSettings();
+//NLog.LogManager.Setup().LoadConfigurationFromAppSettings();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,10 +30,10 @@ var builder = WebApplication.CreateBuilder(args);
 //{
 //    loggerConfiguration.ReadFrom.Configuration(context.Configuration);
 //});
-//builder.Host.UseSerilog();
+builder.Host.UseSerilog();
 
 // replaced Serilog with NLog using this doc: https://github.com/NLog/NLog/wiki/Getting-started-with-ASP.NET-Core-6
-builder.Host.UseNLog();
+//builder.Host.UseNLog();
 // logging NLog logs to the MSSQL Database:
 // https://towardsdev.com/writing-logs-into-sql-server-with-nlog-and-net-6-0-fe212f2f6d19
 
@@ -80,6 +80,21 @@ builder.Services.AddOptions<MailSettingsConfiguration>()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Authentication
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Authentication:Issuer"],
+            ValidAudience = builder.Configuration["Authentication:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Authentication:SecretForKey"]))
+        };
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -94,6 +109,7 @@ app.UseHttpsRedirection();
 // .NET 5.0
 app.UseRouting();
 
+app.UseAuthentication(); // authentication middleware before authorization middleware!
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>

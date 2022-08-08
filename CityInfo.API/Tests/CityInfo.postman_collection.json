@@ -9,6 +9,16 @@
 		{
 			"name": "GET Cities",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -29,6 +39,16 @@
 		{
 			"name": "GET Cities (filtering)",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -55,6 +75,16 @@
 		{
 			"name": "GET Cities (searching)",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -81,6 +111,16 @@
 		{
 			"name": "GET Cities (filtering+searching)",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -111,6 +151,16 @@
 		{
 			"name": "GET Cities (paging)",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -141,6 +191,16 @@
 		{
 			"name": "GET Cities (XML format)",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -167,6 +227,16 @@
 		{
 			"name": "GET City",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -194,6 +264,16 @@
 		{
 			"name": "GET Points Of Interest",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -216,6 +296,16 @@
 		{
 			"name": "GET Point Of Interest",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -239,6 +329,16 @@
 		{
 			"name": "GET File",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -260,6 +360,16 @@
 		{
 			"name": "POST Create Point Of Interest",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -297,6 +407,16 @@
 		{
 			"name": "PUT Update Point Of Interest",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [
 					{
@@ -335,6 +455,16 @@
 		{
 			"name": "PATCH Partially Update Point Of Interest",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PATCH",
 				"header": [
 					{
@@ -368,6 +498,16 @@
 		{
 			"name": "DELETE Delete Point Of Interest",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvZSIsImNpdHkiOiJFYXJ0aCIsIm5iZiI6MTY1OTk1NDY2NiwiZXhwIjoxNjU5OTU4MjY2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoiQ2l0eUluZm9BUEkifQ.CvMYkMdz0ytBP4Hid5jwRyfEVhDQJ8n6Xe2lLK888G4",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
