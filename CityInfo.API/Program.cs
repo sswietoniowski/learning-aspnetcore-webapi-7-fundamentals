@@ -3,6 +3,7 @@ using CityInfo.API.DataAccess.DbContexts.CityInfoDbContext;
 using CityInfo.API.DataAccess.Repositories;
 using CityInfo.API.DataAccess.Repositories.Interfaces;
 using CityInfo.API.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -109,6 +110,8 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddApiVersioning(options =>
 {
     options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.ReportApiVersions = true;
 });
 
 var app = builder.Build();
