@@ -106,6 +106,8 @@ builder.Services.AddAuthorization(options =>
         });
 });
 
+builder.Services.AddApiVersioning();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -130,5 +132,7 @@ app.UseEndpoints(endpoints =>
 
 // .NET 6
 //app.MapControllers(); // <- contains UseRouting() & UseEndpoints() - not necessarily a good thing
+
+app.UseApiVersioning();
 
 app.Run();
