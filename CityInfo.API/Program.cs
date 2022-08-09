@@ -106,7 +106,10 @@ builder.Services.AddAuthorization(options =>
         });
 });
 
-builder.Services.AddApiVersioning();
+builder.Services.AddApiVersioning(options =>
+{
+    options.AssumeDefaultVersionWhenUnspecified = true;
+});
 
 var app = builder.Build();
 
