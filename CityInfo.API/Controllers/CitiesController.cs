@@ -60,7 +60,16 @@ namespace CityInfo.API.Controllers
             return Ok(citiesDto);
         }
 
+        /// <summary>
+        /// Get a city by id
+        /// </summary>
+        /// <param name="id">The id of the city to get</param>
+        /// <param name="includePointsOfInterest">Whether or not to include the points of interest for the given city</param>
+        /// <returns>An IActionResult</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetCity(int id, [FromQuery] bool includePointsOfInterest = false)
         {
             // Passing Data to the API (complex binding mechanism)

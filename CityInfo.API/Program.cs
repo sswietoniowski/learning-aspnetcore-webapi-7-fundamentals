@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Reflection;
 using System.Text;
 
 //Serilog
@@ -79,7 +80,15 @@ builder.Services.AddOptions<MailSettingsConfiguration>()
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(
+    options =>
+    {
+        var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+
+        options.IncludeXmlComments(xmlCommentsFullPath);
+    }
+);
 
 // Authentication
 builder.Services.AddAuthentication("Bearer")
