@@ -1,9 +1,8 @@
-﻿namespace CityInfo.API.DataAccess.Repositories.Interfaces
+﻿namespace CityInfo.API.DataAccess.Repositories.Interfaces;
+
+public interface IUnitOfWork : IDisposable
 {
-    public interface IUnitOfWork : IDisposable
-    {
-        ICityRepository CityRepository { get; }
-        IPointOfInterestRepository PointOfInterestRepository { get; }
-        Task SaveAsync();
-    }
+    ICityRepository CityRepository { get; }
+    IPointOfInterestRepository PointOfInterestRepository { get; }
+    Task SaveAsync();
 }
