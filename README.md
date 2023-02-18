@@ -1,4 +1,4 @@
-# Learning ASP.NET Core - WebAPI (.NET 6/7) Fundamentals
+# Learning ASP.NET Core - WebAPI (.NET 7) Fundamentals
 
 Based on this course [ASP.NET Core 6 Web API Fundamentals](https://app.pluralsight.com/library/courses/asp-dot-net-core-6-web-api-fundamentals/table-of-contents) :+1:.
 
